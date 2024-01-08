@@ -3,32 +3,18 @@ from typing import List
 
 
 class Solution:
-    def minFallingPathSum(self, matrix: List[List[int]]) -> int:
-        m, n = len(matrix), len(matrix[0])
-
-        fall_sum = matrix[:]
-
-        for i in range(1, m):
-            for j in range(n):
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        n = len(triangle)
+        min_path = triangle[:]
+        for i in range(1, n):
+            for j in range(i + 1):
                 if j == 0:
-                    fall_sum[i][j] = (
-                        min(fall_sum[i - 1][j], fall_sum[i - 1][j + 1]) + matrix[i][j]
-                    )
-                elif j == n - 1:
-                    fall_sum[i][j] = (
-                        min(fall_sum[i - 1][j - 1], fall_sum[i - 1][j]) + matrix[i][j]
-                    )
+                    min_path[i][j] += min_path[i - 1][j]
+                elif j == i:
+                    min_path[i][j] += min_path[i - 1][j - 1]
                 else:
-                    fall_sum[i][j] = (
-                        min(
-                            fall_sum[i - 1][j - 1],
-                            fall_sum[i - 1][j],
-                            fall_sum[i - 1][j + 1],
-                        )
-                        + matrix[i][j]
-                    )
-
-        return min(fall_sum[-1])
+                    min_path[i][j] += min(min_path[i - 1][j], min_path[i - 1][j - 1])
+        return min(min_path[-1])
 
 
 class Solution:
