@@ -1,5 +1,56 @@
 # 740. Delete and Earn
-from typing import List
+from typing import Counter, List
+
+
+class Solution:
+    def deleteAndEarn(self, nums: List[int]) -> int:
+        a = Counter(nums)
+
+        f, s = 0, 0
+        for i in range(max(a.keys()), -1, -1):
+            f, s = max(i * a[i] + s, f), f
+
+        return f
+
+
+class Solution:
+    def deleteAndEarn(self, nums: List[int]) -> int:
+        a = Counter(nums)
+
+        prev, cur = 0, 0
+        for i in range(max(a.keys()) + 1):
+            prev, cur = cur, max(i * a[i] + prev, cur)
+
+        return cur
+
+
+class Solution:
+    def deleteAndEarn(self, nums: List[int]) -> int:
+        nums.sort()
+        a = [0] * (nums[-1] + 1)
+        for i in nums:
+            a[i] += 1
+
+        f, s = 0, 0
+        for i in range(nums[-1], -1, -1):
+            f, s = max(i * a[i] + s, f), f
+
+        return f
+
+
+class Solution:
+    def deleteAndEarn(self, nums: List[int]) -> int:
+        nums.sort()
+        n = len(nums)
+        a = {i: 0 for i in range(nums[-1] + 1)}
+        for i in nums:
+            a[i] += 1
+
+        f, s = 0, 0
+        for i in range(nums[-1], -1, -1):
+            f, s = max(i * a[i] + s, f), f
+
+        return f
 
 
 class Solution:
