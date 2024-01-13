@@ -5,6 +5,24 @@ from typing import List
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
         n = len(s)
+        res = []
+
+        def dp(i, cur):
+            if i == n:
+                res.append(" ".join(cur))
+                return
+
+            for j in range(i, n + 1):
+                if s[i:j] in wordDict:
+                    dp(j, cur + [s[i:j]])
+
+        dp(0, [])
+        return res
+
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+        n = len(s)
         words = set(wordDict)
 
         def dfs(idx, cur):
