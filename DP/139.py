@@ -1,5 +1,39 @@
 # 139. Word Break
+from functools import cache
 from typing import List
+
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        n = len(s)
+        a = [False] * (n + 1)
+        a[0] = True
+
+        for i in range(n + 1):
+            for j in range(i):
+                if a[j] and s[j:i] in wordDict:
+                    a[i] = True
+                    break
+
+        return a[n]
+
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        n = len(s)
+
+        @cache
+        def dfs(i):
+            if i == n:
+                return True
+
+            for j in range(i, n + 1):
+                if s[i:j] in wordDict:
+                    if dfs(j):
+                        return True
+            return False
+
+        return dfs(0)
 
 
 class Solution:
