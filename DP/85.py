@@ -5,6 +5,28 @@ from typing import List
 class Solution:
     def maximalRectangle(self, matrix: List[List[str]]) -> int:
         m, n = len(matrix), len(matrix[0])
+        max_rect = 0
+        heights_map = [[0] * (n + 1) for _ in range(m)]
+        for i in range(m):
+            for j in range(n):
+                if matrix[i][j] != "0":
+                    heights_map[i][j] = heights_map[i - 1][j] + 1 if i > 0 else 1
+
+        for heights in heights_map:
+            stack = [-1]
+            for i in range(n + 1):
+                while heights[i] < heights[stack[-1]]:
+                    h = heights[stack.pop()]
+                    w = i - stack[-1] - 1
+                    max_rect = max(max_rect, h * w)
+                stack.append(i)
+
+        return max_rect
+
+
+class Solution:
+    def maximalRectangle(self, matrix: List[List[str]]) -> int:
+        m, n = len(matrix), len(matrix[0])
         height = [0] * (n + 1)
         res = 0
 
