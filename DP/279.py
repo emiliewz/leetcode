@@ -3,6 +3,30 @@ from math import isqrt, sqrt
 
 
 class Solution:
+    def numSquares(self, n: int) -> int:
+        a = [i for i in range(n + 1)]
+        squares = [i**2 for i in range(isqrt(n) + 1)]
+
+        for i in range(1, n + 1):
+            for j in squares:
+                if j <= i:
+                    a[i] = min(a[i], a[i - j] + 1)
+        return a[n]
+
+
+class Solution:
+    def numSquares(self, n: int) -> int:
+        a = [float("inf")] * (n + 1)
+        for i in range(isqrt(n) + 1):
+            a[i**2] = 1
+
+        for i in range(1, n + 1):
+            for j in range(1, isqrt(i) + 1):
+                a[i] = min(a[i], a[j**2] + a[i - j**2])
+        return a[n]
+
+
+class Solution:
     def numSquares(self, n):
         sqr = sqrt(n)
         pool = {i**2 for i in range(int(sqr) + 1)}
