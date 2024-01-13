@@ -3,6 +3,23 @@ from typing import List
 
 
 class Solution:
+    def minSwap(self, A: List[int], B: List[int]) -> int:
+        keep, swap = 0, 1
+        n = len(A)
+        for i in range(1, n):
+            cur_swap, cur_keep = n, n
+            if A[i] > A[i - 1] and B[i] > B[i - 1]:
+                cur_keep = keep
+                cur_swap = swap + 1
+            if A[i] > B[i - 1] and B[i] > A[i - 1]:
+                cur_swap = min(cur_swap, keep + 1)
+                cur_keep = min(cur_keep, swap)
+            keep, swap = cur_keep, cur_swap
+
+        return min(keep, swap)
+
+
+class Solution:
     def minSwap(self, nums1: List[int], nums2: List[int]) -> int:
         swap, no_swap = 1, 0
         n = len(nums1)
