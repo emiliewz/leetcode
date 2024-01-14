@@ -5,6 +5,25 @@ from typing import List
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         n = len(s)
+        if n == 1:
+            return [[s]]
+        res = []
+
+        def get_palindrome(i, cur):
+            if i == n:
+                res.append(cur)
+                return
+            for j in range(i + 1, n + 1):
+                if s[i:j] == s[i:j][::-1]:
+                    get_palindrome(j, cur + [s[i:j]])
+
+        get_palindrome(0, [])
+        return res
+
+
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        n = len(s)
         res = []
 
         def backtrack(idx, cur):
