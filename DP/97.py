@@ -1,4 +1,57 @@
 # 97. Interleaving String
+from functools import cache
+
+
+class Solution:
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        m, n, k = len(s1), len(s2), len(s3)
+        if m + n != k:
+            return False
+
+        a = [[False] * (n + 1) for _ in range(m + 1)]
+        a[0][0] = True
+        for i in range(1, m + 1):
+            if s1[i - 1] == s3[i - 1]:
+                a[i][0] = a[i - 1][0]
+
+        for j in range(1, n + 1):
+            if s2[j - 1] == s3[j - 1]:
+                a[0][j] = a[0][j - 1]
+
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                a[i][j] = (s1[i - 1] == s3[i + j - 1] and a[i - 1][j]) or (
+                    s2[j - 1] == s3[i + j - 1] and a[i][j - 1]
+                )
+        return a[-1][-1]
+
+
+class Solution:
+    def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        m, n, k = len(s1), len(s2), len(s3)
+        if m + n != k:
+            return False
+
+        @cache
+        def dp(i, j):
+            if i == m:
+                return s2[j:] == s3[i + j :]
+            if j == n:
+                return s1[i:] == s3[i + j :]
+
+            if s1[i] == s2[j] == s3[i + j]:
+                return dp(i + 1, j) or dp(i, j + 1)
+
+            if s1[i] == s3[i + j]:
+                return dp(i + 1, j)
+
+            if s2[j] == s3[i + j]:
+                return dp(i, j + 1)
+            return False
+
+        return dp(0, 0)
+
+
 class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
         m, n, l = len(s1), len(s2), len(s3)
