@@ -6,6 +6,26 @@ from typing import List
 
 class Solution:
     def makeArrayIncreasing(self, arr1: List[int], arr2: List[int]) -> int:
+        arr2.sort()
+        m, n = len(arr1), len(arr2)
+
+        @cache
+        def dp(i, cur):
+            if i == m:
+                return 0
+            pos = bisect_right(arr2, cur)
+            # pos = bisect_left(arr2, cur+1)
+
+            return min(
+                dp(i + 1, arr1[i]) if arr1[i] > cur else float("inf"),
+                dp(i + 1, arr2[pos]) + 1 if pos < n else float("inf"),
+            )
+
+        return dp(0, -1) if dp(0, -1) != float("inf") else -1
+
+
+class Solution:
+    def makeArrayIncreasing(self, arr1: List[int], arr2: List[int]) -> int:
         m, n = len(arr1), len(arr2)
         arr2.sort()
         memo = {}
