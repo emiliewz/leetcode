@@ -5,6 +5,30 @@ from typing import List
 
 class Solution:
     def lastStoneWeightII(self, stones: List[int]) -> int:
+        n = len(stones)
+        if n == 1:
+            return stones[0]
+        if n == 2:
+            return abs(stones[0] - stones[1])
+        sums = sum(stones)
+        target = sums >> 1
+        a = [False] * (target + 1)
+        a[0] = True
+        stones.sort()
+
+        for s in stones:
+            for i in range(target, s - 1, -1):
+                a[i] = a[i] or a[i - s]
+
+        for i in range(target, -1, -1):
+            if a[i]:
+                return sums - 2 * i
+
+        return 0
+
+
+class Solution:
+    def lastStoneWeightII(self, stones: List[int]) -> int:
         total_sum = sum(stones)
         target = total_sum // 2
 
