@@ -5,6 +5,19 @@ from typing import List
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         coins.sort()
+        a = [0] + [float("inf")] * amount
+
+        for c in coins:
+            if c > amount:
+                break
+            for i in range(c, amount + 1):
+                a[i] = min(a[i], a[i - c] + 1)
+        return a[amount] if a[amount] != float("inf") else -1
+
+
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        coins.sort()
         dp = [float("inf")] * (amount + 1)
         dp[0] = 0
 
