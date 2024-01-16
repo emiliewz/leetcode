@@ -5,21 +5,18 @@ from typing import List
 
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
-        total = sum(nums)
-        if total % 2 != 0:
+        if sum(nums) & 1:
             return False
+        target = sum(nums) >> 1
         nums.sort()
-        target = total // 2
 
         @cache
-        def dp(i, total):
-            if total == target:
+        def dp(i, cur):
+            if cur == target:
                 return True
-            if i == len(nums):
+            if cur > target or i == len(nums):
                 return False
-
-            res = dp(i + 1, total + nums[i]) or dp(i + 1, total)
-            return res
+            return dp(i + 1, cur + nums[i]) or dp(i + 1, cur)
 
         return dp(0, 0)
 
@@ -59,30 +56,5 @@ class Solution:
 
             memo[(i, k)] = dp(i + 1, k + nums[i]) or dp(i + 1, k)
             return memo[(i, k)]
-
-        return dp(0, 0)
-
-
-class Solution:
-    def canPartition(self, nums: List[int]) -> bool:
-        total = sum(nums)
-        if total % 2 != 0:
-            return False
-        nums.sort()
-        target = total // 2
-
-        @cache
-        def dp(idx, total):
-            if total == target:
-                return True
-            if idx == len(nums):
-                return False
-
-            for i in range(idx, len(nums)):
-                if total + nums[i] <= target:
-                    if dp(i + 1, total + nums[i]) or dp(i + 1, total):
-                        return True
-
-            return False
 
         return dp(0, 0)
