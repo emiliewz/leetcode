@@ -1,4 +1,36 @@
 # 688. Knight Probability in Chessboard
+from functools import cache
+
+
+class Solution:
+    def knightProbability(self, n: int, k: int, row: int, column: int) -> float:
+        directions = [
+            (-1, 2),
+            (-2, 1),
+            (-1, -2),
+            (-2, -1),
+            (1, 2),
+            (1, -2),
+            (2, 1),
+            (2, -1),
+        ]
+
+        @cache
+        def dp(x, y, k):
+            if x < 0 or x >= n or y < 0 or y >= n:
+                return 0
+            if k == 0:
+                return 1
+
+            res = 0
+            for dx, dy in directions:
+                res += dp(x + dx, y + dy, k - 1) / 8
+
+            return res
+
+        return dp(row, column, k)
+
+
 class Solution:
     def knightProbability(self, n: int, k: int, row: int, column: int) -> float:
         directions = [
