@@ -4,6 +4,20 @@ from typing import List
 
 class Solution:
     def combinationSum4(self, nums: List[int], target: int) -> int:
+        a = [1] + [0] * target
+        nums.sort()
+
+        for i in range(1, target + 1):
+            for n in nums:
+                if n > i:
+                    break
+                a[i] += a[i - n]
+
+        return a[target]
+
+
+class Solution:
+    def combinationSum4(self, nums: List[int], target: int) -> int:
         nums.sort()
         memo = {}
 
