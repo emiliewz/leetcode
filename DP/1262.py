@@ -4,6 +4,17 @@ from typing import List
 
 class Solution:
     def maxSumDivThree(self, nums: List[int]) -> int:
+        a = [0] * 3
+        for n in nums:
+            tmp = a[:]
+            for i in range(3):
+                cur = tmp[i] + n
+                a[cur % 3] = max(a[cur % 3], cur)
+        return a[0]
+
+
+class Solution:
+    def maxSumDivThree(self, nums: List[int]) -> int:
         dp = [0, 0, 0]
 
         for i in nums:
@@ -26,7 +37,6 @@ class Solution:
 
 class Solution:
     def maxSumDivThree(self, nums: List[int]) -> int:
-        n = len(nums)
         total_sum = sum(nums)
         sums = [False] * (total_sum + 1)
         sums[0] = True
