@@ -5,6 +5,23 @@ from typing import List
 
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
+        nums = [1] + nums + [1]
+        n = len(nums)
+        a = [[0] * n for _ in range(n)]
+
+        for l in range(2, n + 1):
+            for i in range(n - l + 1):
+                j = i + l - 1
+                for k in range(i + 1, j):
+                    a[i][j] = max(
+                        a[i][j], a[i][k] + a[k][j] + nums[i] * nums[j] * nums[k]
+                    )
+
+        return a[0][n - 1]
+
+
+class Solution:
+    def maxCoins(self, nums: List[int]) -> int:
         @cache
         def dp(l, r):
             if l > r:
