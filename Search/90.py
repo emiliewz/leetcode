@@ -4,6 +4,24 @@ from typing import List
 
 class Solution:
     def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        nums.sort()
+        res = []
+
+        def dfs(i, cur):
+            res.append(cur)
+
+            for j in range(i, n):
+                if j > i and nums[j] == nums[j - 1]:
+                    continue
+                dfs(j + 1, cur + [nums[j]])
+
+        dfs(0, [])
+        return res
+
+
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
         res = []
         nums.sort()
 
