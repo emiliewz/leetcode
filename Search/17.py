@@ -1,5 +1,37 @@
 # 17. Letter Combinations of a Phone Number
+from functools import cache
 from typing import List
+
+
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        if not digits:
+            return []
+        a = {
+            2: "abc",
+            3: "def",
+            4: "ghi",
+            5: "jkl",
+            6: "mno",
+            7: "pqrs",
+            8: "tuv",
+            9: "wxyz",
+        }
+        n = len(digits)
+        res = []
+
+        @cache
+        def dp(i, cur):
+            if len(cur) == n:
+                res.append(cur)
+                return
+
+            for j in range(i, n):
+                for d in a[int(digits[j])]:
+                    dp(j + 1, cur + d)
+
+        dp(0, "")
+        return res
 
 
 class Solution:
