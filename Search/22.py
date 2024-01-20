@@ -4,6 +4,23 @@ from typing import List
 
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
+        def dfs(l, r, cur):
+            if l < r or l > n or r > n:
+                return
+            if l == r == n:
+                res.append(cur)
+                return 1
+
+            dfs(l + 1, r, cur + "(")
+            dfs(l, r + 1, cur + ")")
+
+        res = []
+        dfs(0, 0, "")
+        return res
+
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
         res = []
         s = "()"
 
