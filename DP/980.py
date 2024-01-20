@@ -4,6 +4,37 @@ from typing import List
 
 class Solution:
     def uniquePathsIII(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        zeros = 1
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 0:
+                    zeros += 1
+                elif grid[i][j] == 1:
+                    sx, sy = i, j
+        res = 0
+
+        def dp(i, j):
+            nonlocal zeros, res
+            if i < 0 or j < 0 or i >= m or j >= n or grid[i][j] == -1:
+                return
+            if grid[i][j] == 2:
+                res += zeros == 0
+                return
+
+            grid[i][j] = -1
+            for dx, dy in [(1, 0), (0, 1), (-1, 0), (0, -1)]:
+                zeros -= 1
+                dp(i + dx, j + dy)
+                zeros += 1
+            grid[i][j] = 0
+
+        dp(sx, sy)
+        return res
+
+
+class Solution:
+    def uniquePathsIII(self, grid: List[List[int]]) -> int:
         m, n, empty = len(grid), len(grid[0]), 1
         for i in range(m):
             for j in range(n):
