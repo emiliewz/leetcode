@@ -5,6 +5,30 @@ from typing import List
 
 class Solution:
     def numSquarefulPerms(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 1:
+            return math.isqrt(nums[0]) ** 2 == nums[0]
+        res = 0
+        nums.sort()
+
+        def dfs(nums, cur):
+            nonlocal res
+            if not nums:
+                res += 1
+                return
+
+            for i in range(len(nums)):
+                if i > 0 and nums[i] == nums[i - 1]:
+                    continue
+                if not cur or math.isqrt(nums[i] + cur) ** 2 == nums[i] + cur:
+                    dfs(nums[:i] + nums[i + 1 :], nums[i])
+
+        dfs(nums, "")
+        return res
+
+
+class Solution:
+    def numSquarefulPerms(self, nums: List[int]) -> int:
         res = []
         nums.sort()
 
