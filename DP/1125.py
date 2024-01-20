@@ -6,10 +6,30 @@ class Solution:
     def smallestSufficientTeam(
         self, req_skills: List[str], people: List[List[str]]
     ) -> List[int]:
+        a = {0: []}
+        n = len(req_skills)
+        skills = {s: i for i, s in enumerate(req_skills)}
+
+        for i, person in enumerate(people):
+            prev_skills = 0
+            for s in person:
+                prev_skills |= 1 << skills[s]
+
+            for s, p in list(a.items()):
+                new_skills = s | prev_skills
+                if not new_skills in a or len(a[new_skills]) > len(p) + 1:
+                    a[new_skills] = p + [i]
+
+        return a[(1 << n) - 1]
+
+
+class Solution:
+    def smallestSufficientTeam(
+        self, req_skills: List[str], people: List[List[str]]
+    ) -> List[int]:
         n = len(req_skills)
         dp = {0: []}
         skill_dict = {skill: i for i, skill in enumerate(req_skills)}
-        print(skill_dict)
 
         for i, j in enumerate(people):
             prev_skills = 0
