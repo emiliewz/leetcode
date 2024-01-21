@@ -5,6 +5,49 @@ from typing import List
 
 class Solution:
     def shortestBridge(self, grid: List[List[int]]) -> int:
+        def isValid(i, j):
+            if i < 0 or i >= m or j < 0 or j >= n:
+                return False
+            return True
+
+        def dfs(i, j):
+            if not grid[i][j]:
+                return
+            visit.add((i, j))
+            for dx, dy in directions:
+                nx, ny = i + dx, j + dy
+                if not (nx, ny) in visit and isValid(nx, ny):
+                    dfs(nx, ny)
+
+        def bfs():
+            q = deque(visit)
+            res = 0
+
+            while q:
+                for _ in range(len(q)):
+                    i, j = q.popleft()
+                    for dx, dy in directions:
+                        x, y = i + dx, j + dy
+
+                        if (x, y) not in visit and isValid(x, y):
+                            if grid[x][y]:
+                                return res
+                            visit.add((x, y))
+                            q.append((x, y))
+                res += 1
+            return res
+
+        m, n = len(grid), len(grid[0])
+        directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+        visit = set()
+
+        i, j = next((i,j) for i in range(m) for j in range(n) if grid[i][j])
+        dfs(i,j)
+        return bfs()
+
+
+class Solution:
+    def shortestBridge(self, grid: List[List[int]]) -> int:
         N = len(grid)
         visit = set()
 
@@ -36,11 +79,11 @@ class Solution:
                         q.append((curR, curC))
                 res += 1
             return -1
-        
-        i, j = next((i,j) for i in range(N) for j in range(N) if grid[i][j])
+
+        i, j = next((i, j) for i in range(N) for j in range(N) if grid[i][j])
         dfs(i, j)
         return bfs()
-                
+
         # for i in range(N):
         #     for j in range(N):
         #         if grid[i][j]:
