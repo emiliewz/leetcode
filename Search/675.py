@@ -5,6 +5,56 @@ from typing import List
 
 class Solution:
     def cutOffTree(self, forest: List[List[int]]) -> int:
+        m, n = len(forest), len(forest[0])
+        trees = []
+
+        for i in range(m):
+            for j in range(n):
+                cur = forest[i][j]
+                if cur > 1:
+                    trees.append([cur, i, j])
+        trees.sort()
+
+        def bfs(sx, sy, tx, ty):
+            q = deque()
+            q.append((sx, sy))
+            steps = 0
+            visit = set()
+
+            while q:
+                for _ in range(len(q)):
+                    x, y = q.popleft()
+                    if x == tx and y == ty:
+                        return steps
+                    for dx, dy in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
+                        nx = x + dx
+                        ny = y + dy
+                        if (
+                            0 <= nx < m
+                            and 0 <= ny < n
+                            and forest[nx][ny]
+                            and (nx, ny) not in visit
+                        ):
+                            visit.add((x + dx, y + dy))
+                            q.append((x + dx, y + dy))
+
+                steps += 1
+            return -1
+
+        res = 0
+        sx, sy = 0, 0
+        for tree in trees:
+            steps = bfs(sx, sy, tree[1], tree[2])
+            if steps < 0:
+                return -1
+            res += steps
+            sx, sy = tree[1], tree[2]
+
+        return res
+
+
+class Solution:
+    def cutOffTree(self, forest: List[List[int]]) -> int:
         r = len(forest)
         c = len(forest[0])
         trees = []
