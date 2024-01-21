@@ -4,6 +4,33 @@ from typing import List
 
 class Solution:
     def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+        nums.sort(reverse=True)
+        sums = sum(nums)
+        target = sums // k
+        n = len(nums)
+        if sums % k != 0 or len(nums) < k or nums[0] > target:
+            return False
+        a = [0] * k
+
+        def dfs(i):
+            if i == n:
+                return True
+            for j in range(k):
+                if nums[i] + a[j] <= target:
+                    a[j] += nums[i]
+                    if dfs(i + 1):
+                        return True
+                    a[j] -= nums[i]
+                    if a[j] == 0:
+                        return False
+
+            return False
+
+        return dfs(0)
+
+
+class Solution:
+    def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
         if sum(nums) % k:
             return False
         target = sum(nums) // k
