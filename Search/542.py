@@ -3,7 +3,28 @@ from collections import deque
 from typing import List
 
 
-# DP
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        m, n = len(mat), len(mat[0])
+        a = mat[:]
+
+        for i in range(m):
+            for j in range(n):
+                if a[i][j]:
+                    top = a[i - 1][j] if i > 0 else m + n
+                    left = a[i][j - 1] if j > 0 else m + n
+                    a[i][j] = min(top, left) + 1
+
+        for i in range(m - 1, -1, -1):
+            for j in range(n - 1, -1, -1):
+                if a[i][j]:
+                    bottom = a[i + 1][j] if i + 1 < m else m + n
+                    right = a[i][j + 1] if j + 1 < n else m + n
+                    a[i][j] = min(a[i][j], min(bottom, right) + 1)
+
+        return a
+
+
 class Solution:
     def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
         r = len(mat)
