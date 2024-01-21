@@ -8,6 +8,26 @@ class Solution:
         a = [[False] * (n + 1) for _ in range(m + 1)]
         a[0][0] = True
 
+        for i in range(1, n + 1):
+            if p[i - 1] == "*":
+                a[0][i] = a[0][i - 1]
+
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if p[j - 1] == "*":
+                    a[i][j] = a[i - 1][j] or a[i][j - 1]
+                if p[j - 1] in ["?", s[i - 1]]:
+                    a[i][j] = a[i - 1][j - 1]
+
+        return a[-1][-1]
+
+
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        m, n = len(s), len(p)
+        a = [[False] * (n + 1) for _ in range(m + 1)]
+        a[0][0] = True
+
         for j in range(1, n + 1):
             if p[j - 1] == "*":
                 a[0][j] = a[0][j - 1]
@@ -38,7 +58,6 @@ class Solution:
                 return dp(i, j + 1) or dp(i + 1, j)
             if match:
                 return dp(i + 1, j + 1)
-            return False
 
         return dp(0, 0)
 
