@@ -5,6 +5,23 @@ from typing import List
 
 class Solution:
     def largestSumOfAverages(self, nums: List[int], k: int) -> float:
+        n = len(nums)
+
+        sums = [0] * (n + 1)
+        for i in range(1, n + 1):
+            sums[i] = sums[i - 1] + nums[i - 1]
+
+        a = [sums[i] / i for i in range(1, n + 1)]
+
+        for j in range(2, k + 1):
+            for i in range(n, j - 1, -1):
+                for p in range(j - 1, i):
+                    a[i - 1] = max(a[i - 1], a[p - 1] + (sums[i] - sums[p]) / (i - p))
+        return a[-1]
+
+
+class Solution:
+    def largestSumOfAverages(self, nums: List[int], k: int) -> float:
         @cache
         def dp(i, steps):
             if steps == k - 1:
