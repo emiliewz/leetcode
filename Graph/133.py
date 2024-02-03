@@ -21,6 +21,25 @@ class Node:
 class Solution:
     def cloneGraph(self, node: Optional["Node"]) -> Optional["Node"]:
         if not node:
+            return None
+
+        q = deque([node])
+        a = {node.val: Node(node.val)}
+
+        while q:
+            cur = q.popleft()
+            for nei in cur.neighbors:
+                if nei.val not in a:
+                    a[nei.val] = Node(nei.val)
+                    q.append(nei)
+                a[cur.val].neighbors.append(a[nei.val])
+
+        return a[node.val]
+
+
+class Solution:
+    def cloneGraph(self, node: Optional["Node"]) -> Optional["Node"]:
+        if not node:
             return node
 
         q = deque([node])
