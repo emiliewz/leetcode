@@ -1,5 +1,24 @@
 # 841. Keys and Rooms
+from collections import deque
 from typing import List
+
+
+class Solution:
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        n = len(rooms)
+        keys = set()
+        q = deque([0])
+        while q:
+            cur = q.popleft()
+            keys.add(cur)
+
+            if len(keys) == n:
+                return True
+            for k in rooms[cur]:
+                if k not in keys:
+                    q.append(k)
+
+        return False
 
 
 class Solution:
