@@ -1,7 +1,37 @@
 # 695. Max Area of Island
-
-
+from collections import Counter
 from typing import List
+
+
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        def find(x):
+            if x != p[x]:
+                p[x] = find(p[x])
+            return p[x]
+
+        def union(i, j):
+            p1, p2 = find(i), find(j)
+            p[p1] = p2
+
+        m, n = len(grid), len(grid[0])
+        a = {}
+        k = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j]:
+                    a[i, j] = k
+                    k += 1
+        if not k:
+            return 0
+        p = list(range(k))
+        for i, j in a:
+            if (i - 1, j) in a:
+                union(a[i - 1, j], a[i, j])
+            if (i, j - 1) in a:
+                union(a[i, j - 1], a[i, j])
+        res = Counter([find(i) for i in range(k)]).most_common()[0][1]
+        return res
 
 
 class Solution:
