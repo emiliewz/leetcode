@@ -11,6 +11,41 @@ class Solution:
                 p[x] = find(p[x])
             return p[x]
 
+        def union(i, j):
+            p1, p2 = find(i), find(j)
+            if p1 == p2:
+                return 0
+            p[p1] = p2
+            return 1
+
+        def similar(i, j):
+            f, s = strs[i], strs[j]
+            count = 0
+            for k in range(m):
+                if f[k] != s[k]:
+                    count += 1
+                if count > 2:
+                    return False
+            return True
+
+        n, m = len(strs), len(strs[0])
+        p = list(range(n))
+        res = n
+
+        for i, j in combinations(range(n), 2):
+            if similar(i, j):
+                res -= union(i, j)
+
+        return res
+
+
+class Solution:
+    def numSimilarGroups(self, strs: List[str]) -> int:
+        def find(x):
+            if x != p[x]:
+                p[x] = find(p[x])
+            return p[x]
+
         def union(x, y):
             px, py = find(x), find(y)
             if px == py:
