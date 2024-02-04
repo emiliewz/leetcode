@@ -7,6 +7,21 @@ class Solution:
     def findJudge(self, n: int, trust: List[List[int]]) -> int:
         if not trust:
             return 1 if n == 1 else -1
+        scores = [0] * (n + 1)
+        for i, j in trust:
+            scores[i] -= 1
+            scores[j] += 1
+
+        res = [i for i, j in enumerate(scores) if j == n - 1]
+        if not res or len(res) > 1:
+            return -1
+        return res[0]
+
+
+class Solution:
+    def findJudge(self, n: int, trust: List[List[int]]) -> int:
+        if not trust:
+            return 1 if n == 1 else -1
 
         t = [0] * (n + 1)
 
