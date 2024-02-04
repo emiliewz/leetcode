@@ -5,6 +5,30 @@ from typing import List
 
 class Solution:
     def isBipartite(self, graph: List[List[int]]) -> bool:
+        if graph == [[]]:
+            return True
+        n = len(graph)
+        color = {}
+        for idx in range(n):
+            if idx not in color:
+                color[idx] = 0
+                q = deque([(idx, 0)])
+
+                while q:
+                    i, c = q.popleft()
+                    for nei in graph[i]:
+                        nei_c = c ^ 1
+                        if nei in color:
+                            if color[nei] != nei_c:
+                                return False
+                        else:
+                            color[nei] = nei_c
+                            q.append((nei, nei_c))
+        return True
+
+
+class Solution:
+    def isBipartite(self, graph: List[List[int]]) -> bool:
         n = len(graph)
         color = {}
 
