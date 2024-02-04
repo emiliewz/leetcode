@@ -1,6 +1,48 @@
 # 827. Making A Large Island
-from collections import deque
+from collections import Counter, deque
 from typing import List
+
+
+class Solution:
+    def largestIsland(self, grid: List[List[int]]) -> int:
+        def find(x):
+            if x != p[x]:
+                p[x] = find(p[x])
+            return p[x]
+
+        def union(i, j):
+            p1, p2 = find(i), find(j)
+            p[p1] = p2
+
+        n = len(grid)
+        a, k, candidates = {}, 0, set()
+        for i in range(n):
+            for j in range(n):
+                if grid[i][j]:
+                    a[i, j] = k
+                    k += 1
+                else:
+                    candidates.add((i, j))
+        if not k:
+            return 1
+        if k == n**2:
+            return n**2
+        p = list(range(k))
+        for i, j in a:
+            if (i - 1, j) in a:
+                union(a[i, j], a[i - 1, j])
+            if (i, j - 1) in a:
+                union(a[i, j], a[i, j - 1])
+        islands = dict(Counter([find(i) for i in range(k)]))
+        res = 0
+        for x, y in candidates:
+            canConnect = set()
+            for dx, dy in [(-1, 0), (1, 0), (0, 1), (0, -1)]:
+                i, j = x + dx, y + dy
+                if (i, j) in a:
+                    canConnect.add(find(a[i, j]))
+            res = max(res, sum([islands[i] for i in canConnect]) + 1)
+        return res
 
 
 class Solution:
