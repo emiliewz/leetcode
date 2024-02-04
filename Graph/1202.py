@@ -10,6 +10,37 @@ class Solution:
                 p[x] = find(p[x])
             return p[x]
 
+        def union(i, j):
+            p1, p2 = find(i), find(j)
+            p[p1] = p2
+
+        n = len(s)
+        p = list(range(n))
+        for i, j in pairs:
+            union(i, j)
+
+        finds = [find(i) for i in range(n)]
+        dicts = defaultdict(list)
+        for i in range(n):
+            par = find(i)
+            dicts[par].append(s[i])
+
+        for d in dicts:
+            dicts[d].sort(reverse=True)
+        res = ""
+        for i in range(n):
+            par = find(i)
+            res += dicts[par].pop()
+        return res
+
+
+class Solution:
+    def smallestStringWithSwaps(self, s: str, pairs: List[List[int]]) -> str:
+        def find(x):
+            if x != p[x]:
+                p[x] = find(p[x])
+            return p[x]
+
         def union(x, y):
             px, py = find(x), find(y)
             if px != py:
