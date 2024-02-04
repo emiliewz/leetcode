@@ -5,6 +5,43 @@ from typing import List
 
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
+        def find(x):
+            if x != p[x]:
+                p[x] = find(p[x])
+            return p[x]
+
+        def union(x, y):
+            p1, p2 = find(x), find(y)
+            p[p1] = p2
+
+        n = len(accounts)
+        p = list(range(n))
+        graph = {}
+
+        for i, (_, *emails) in enumerate(accounts):
+            for e in emails:
+                if e in graph:
+                    union(i, graph[e])
+                else:
+                    graph[e] = i
+        pars = [find(i) for i in range(n)]
+        a = defaultdict(list)
+
+        for i, j in enumerate(pars):
+            a[j].append(i)
+
+        res = []
+        for i, ac in a.items():
+            author = accounts[i][0]
+            emails = set()
+            for j in ac:
+                emails.update(accounts[j][1:])
+            res.append([author] + list(sorted(emails)))
+        return res
+
+
+class Solution:
+    def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
         n = len(accounts)
         par = [i for i in range(n)]
         rank = [1] * n
