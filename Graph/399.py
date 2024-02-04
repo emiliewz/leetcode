@@ -1,6 +1,28 @@
 # 399. Evaluate Division
 from collections import defaultdict, deque
+from itertools import combinations
 from typing import List
+
+
+class Solution:
+    def calcEquation(
+        self, equations: List[List[str]], values: List[float], queries: List[List[str]]
+    ) -> List[float]:
+        graph = defaultdict(dict)
+        for idx, (i, j) in enumerate(equations):
+            graph[i][j] = values[idx]
+            graph[j][i] = 1 / values[idx]
+
+        for i in graph:
+            graph[i][i] = 1
+            for j, k in combinations(graph[i], 2):
+                if j not in graph[k]:
+                    graph[k][j] = graph[k][i] * graph[i][j]
+                    graph[j][k] = graph[j][i] * graph[i][k]
+
+        return [
+            graph[i][j] if (i in graph and j in graph[i]) else -1 for i, j in queries
+        ]
 
 
 class Solution:
