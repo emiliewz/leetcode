@@ -5,6 +5,27 @@ from typing import List
 
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        graph = {i: [] for i in range(numCourses)}
+        froms = defaultdict(list)
+        for i, j in prerequisites:
+            graph[i].append(j)
+            froms[j].append(i)
+
+        ends = [i for i in graph if not graph[i]]
+        q = deque(ends)
+        while q:
+            cur = q.popleft()
+            for i in froms[cur]:
+                graph[i].remove(cur)
+                if not graph[i]:
+                    q.append(i)
+            graph.pop(cur)
+
+        return not graph
+
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         preCrsNeed = {i: set() for i in range(numCourses)}
         crsCanDo = defaultdict(set)
 
