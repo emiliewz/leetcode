@@ -7,6 +7,37 @@ from typing import List
 
 class Solution:
     def largestComponentSize(self, nums: List[int]) -> int:
+        def find(x):
+            if x != p[x]:
+                p[x] = find(p[x])
+            return p[x]
+
+        def union(i, j):
+            p1, p2 = find(i), find(j)
+            p[p1] = p2
+
+        def get_prime_factor(n):
+            for i in range(2, int(sqrt(n)) + 1):
+                if not n % i:
+                    return get_prime_factor(n // i) | set([i])
+            return set([n])
+
+        n = len(nums)
+        p = list(range(n))
+        a = defaultdict(list)
+        for i, j in enumerate(nums):
+            for prime in get_prime_factor(j):
+                a[prime].append(i)
+
+        for k in a:
+            for i in range(1, len(a[k])):
+                union(a[k][i], a[k][i - 1])
+
+        return Counter([find(i) for i in range(n)]).most_common()[0][1]
+
+
+class Solution:
+    def largestComponentSize(self, nums: List[int]) -> int:
         def union(i, j):
             p1, p2 = find(i), find(j)
             if p1 == p2:
