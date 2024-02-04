@@ -1,5 +1,27 @@
 # 547. Number of Provinces
+from itertools import combinations
 from typing import List
+
+
+class Solution:
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        n = len(isConnected)
+        p = list(range(n))
+
+        def find(x):
+            if x != p[x]:
+                p[x] = find(p[x])
+            return p[x]
+
+        def union(i, j):
+            p1, p2 = find(i), find(j)
+            p[p2] = p1
+
+        for i, j in combinations(range(n), 2):
+            if isConnected[i][j]:
+                union(i, j)
+
+        return len(set([find(i) for i in range(n)]))
 
 
 class Solution:
