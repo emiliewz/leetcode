@@ -5,6 +5,37 @@ from typing import List
 
 class Solution:
     def minMutation(self, startGene: str, endGene: str, bank: List[str]) -> int:
+        def get_nei(s):
+            res = []
+            for b in bank:
+                for i in range(8):
+                    if s[:i] == b[:i] and s[i + 1 :] == b[i + 1 :]:
+                        res.append(b)
+                        break
+            return res
+
+        if startGene == endGene:
+            return 0
+        q = deque([startGene])
+        visit = set([startGene])
+        steps = 0
+        while q:
+            for _ in range(len(q)):
+                cur = q.popleft()
+                if cur == endGene:
+                    return steps
+
+                for nei in get_nei(cur):
+                    if nei not in visit:
+                        visit.add(nei)
+                        q.append(nei)
+            steps += 1
+
+        return -1
+
+
+class Solution:
+    def minMutation(self, startGene: str, endGene: str, bank: List[str]) -> int:
         q = deque([startGene])
         visit = set([startGene])
         mut = 0
