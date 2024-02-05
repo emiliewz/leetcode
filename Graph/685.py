@@ -5,6 +5,49 @@ from typing import List
 
 class Solution:
     def findRedundantDirectedConnection(self, edges: List[List[int]]) -> List[int]:
+        n = len(edges)
+        graph = {i: [] for i in range(1, n + 1)}
+        froms = defaultdict(list)
+        for i, j in edges:
+            graph[i].append(j)
+            froms[j].append(i)
+
+        ends = [i for i in range(1, n + 1) if not graph[i]]
+        candidates = [i for i in froms if len(froms[i]) > 1]
+
+        q = deque(ends)
+        while q:
+            cur = q.popleft()
+            for nei in froms[cur]:
+                graph[nei].remove(cur)
+                if not graph[nei]:
+                    q.append(nei)
+            froms.pop(cur)
+        haveCircle = False if not froms else True
+
+        # not circle
+        if not haveCircle:
+            for i, j in edges[::-1]:
+                if j in candidates:
+                    return [i, j]
+
+        # must have a circle
+        if not candidates:
+            for i, j in edges[::-1]:
+                if i in froms and j in froms:
+                    return [i, j]
+
+        # have duplicate
+        for i, j in edges[::-1]:
+            if j in candidates and i in froms and j in froms[i]:
+                return [i, j]
+        for i, j in edges[::-1]:
+            if j in candidates and i in froms:
+                return [i, j]
+
+
+class Solution:
+    def findRedundantDirectedConnection(self, edges: List[List[int]]) -> List[int]:
         def break_loop():
             q = deque(ends)
             while q:
@@ -40,7 +83,7 @@ class Solution:
         for i, j in edges[::-1]:
             if j == duplicate and i in graph[j]:
                 return [i, j]
-            
+
         # have a loop invloves more elements
         for i, j in edges[::-1]:
             if j == duplicate and (i in froms and froms[i]):
