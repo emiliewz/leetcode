@@ -1,5 +1,5 @@
 # 863. All Nodes Distance K in Binary Tree
-from collections import deque
+from collections import defaultdict, deque
 from typing import List
 
 
@@ -9,6 +9,40 @@ class TreeNode:
         self.val = x
         self.left = None
         self.right = None
+
+
+class Solution:
+    def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
+        par = {}
+        q = deque([root])
+        while q:
+            cur = q.popleft()
+            if cur.left:
+                par[cur.left.val] = cur
+                q.append(cur.left)
+            if cur.right:
+                par[cur.right.val] = cur
+                q.append(cur.right)
+
+        q.append(target)
+        visit = set()
+        res = []
+        while q and k >= 0:
+            for _ in range(len(q)):
+                cur = q.popleft()
+                visit.add(cur.val)
+                if k == 0:
+                    res.append(cur.val)
+
+                if cur.val in par and par[cur.val].val not in visit:
+                    q.append(par[cur.val])
+                if cur.left and cur.left.val not in visit:
+                    q.append(cur.left)
+                if cur.right and cur.right.val not in visit:
+                    q.append(cur.right)
+            k -= 1
+
+        return res
 
 
 class Solution:
