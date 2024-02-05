@@ -9,11 +9,43 @@ class Solution:
     ) -> int:
         if source == target:
             return 0
+
+        graph = defaultdict(set)
+        for i, route in enumerate(routes):
+            for stop in route:
+                graph[stop].add(i)
+
+        if source not in graph or target not in graph:
+            return -1
+
+        q = deque([target])
+        stops = 0
+        visit = set()
+        while q:
+            for _ in range(len(q)):
+                cur = q.popleft()
+
+                for bus in graph[cur]:
+                    if bus not in visit:
+                        for i in routes[bus]:
+                            if i == source:
+                                return stops + 1
+                            visit.add(bus)
+                            q.append(i)
+            stops += 1
+        return -1
+
+
+class Solution:
+    def numBusesToDestination(
+        self, routes: List[List[int]], source: int, target: int
+    ) -> int:
+        if source == target:
+            return 0
         graph = defaultdict(set)
         for bus, route in enumerate(routes):
             for r in route:
                 graph[r].add(bus)
-        n = max(graph.keys())
         if source not in graph or target not in graph:
             return -1
 
