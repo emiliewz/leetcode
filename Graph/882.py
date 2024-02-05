@@ -7,6 +7,36 @@ from typing import List
 class Solution:
     def reachableNodes(self, edges: List[List[int]], maxMoves: int, n: int) -> int:
         graph = defaultdict(set)
+        for u, v, w in edges:
+            graph[u].add((v, w + 1))
+            graph[v].add((u, w + 1))
+        dist = [float("inf")] * n
+        dist[0] = 0
+
+        h = [(0, 0)]
+        while h:
+            cur_d, cur = heappop(h)
+            for i, d in graph[cur]:
+                new_d = cur_d + d
+                if new_d < dist[i]:
+                    dist[i] = new_d
+                    heappush(h, (new_d, i))
+        res = sum(d <= maxMoves for d in dist)
+
+        for u, v, w in edges:
+            k = 0
+            if dist[v] < maxMoves:
+                k += maxMoves - dist[v]
+            if dist[u] < maxMoves:
+                k += maxMoves - dist[u]
+            res += min(k, w)
+
+        return res
+
+
+class Solution:
+    def reachableNodes(self, edges: List[List[int]], maxMoves: int, n: int) -> int:
+        graph = defaultdict(set)
         dist = [float("inf")] * n
         dist[0] = 0
         for i, j, w in edges:
