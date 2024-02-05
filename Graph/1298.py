@@ -13,6 +13,44 @@ class Solution:
         initialBoxes: List[int],
     ) -> int:
         n = len(candies)
+        initial_keys = [i for i in range(n) if status[i]]
+        for b in initialBoxes:
+            initial_keys += keys[b]
+        have_keys = set(initial_keys)
+        have_boxes = set(initialBoxes)
+        q = deque(initialBoxes)
+        opened = set()
+
+        while q:
+            cur = q.popleft()
+
+            if cur in have_keys:
+                opened.add(cur)
+                have_keys.update(keys[cur])
+
+                for b in containedBoxes[cur]:
+                    have_boxes.add(b)
+                    if b not in opened:
+                        q.append(b)
+
+        res = 0
+        for i in have_keys:
+            if i in have_boxes:
+                res += candies[i]
+
+        return res
+
+
+class Solution:
+    def maxCandies(
+        self,
+        status: List[int],
+        candies: List[int],
+        keys: List[List[int]],
+        containedBoxes: List[List[int]],
+        initialBoxes: List[int],
+    ) -> int:
+        n = len(candies)
         q = deque(initialBoxes)
         have_keys = set([i for i in range(n) if status[i]])
         have_boxes = set(initialBoxes)
