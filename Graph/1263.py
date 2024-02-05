@@ -6,6 +6,59 @@ from typing import List
 
 class Solution:
     def minPushBox(self, grid: List[List[str]]) -> int:
+        def isValid(x, y):
+            return 0 <= x < m and 0 <= y < n and grid[x][y] != "#"
+
+        def canDo(box, s, t):
+            q = deque([s])
+            visit = set(s)
+
+            while q:
+                x, y = q.popleft()
+                if (x, y) == t:
+                    return True
+
+                for dx, dy in [(-1, 0), (1, 0), (0, 1), (0, -1)]:
+                    i, j = x + dx, y + dy
+                    if (i, j) not in visit and isValid(i, j) and (i, j) != box:
+                        visit.add((i, j))
+                        q.append((i, j))
+            return False
+
+        m, n = len(grid), len(grid[0])
+        initbox = next((i, j) for i in range(m) for j in range(n) if grid[i][j] == "B")
+        initplayer = next(
+            (i, j) for i in range(m) for j in range(n) if grid[i][j] == "S"
+        )
+        target = next((i, j) for i in range(m) for j in range(n) if grid[i][j] == "T")
+
+        q = deque([(initbox, initplayer)])
+        visit, steps = set((initbox, initplayer)), 0
+
+        while q:
+            for _ in range(len(q)):
+                box, player = q.popleft()
+                if box == target:
+                    return steps
+
+                for dx, dy in [(-1, 0), (1, 0), (0, 1), (0, -1)]:
+                    new_b = (box[0] + dx, box[1] + dy)
+                    new_p = (box[0] - dx, box[1] - dy)
+                    if (
+                        (new_b, new_p) not in visit
+                        and isValid(*new_b)
+                        and isValid(*new_p)
+                        and canDo(box, player, new_p)
+                    ):
+                        visit.add((new_b, new_p))
+                        q.append((new_b, new_p))
+            steps += 1
+
+        return -1
+
+
+class Solution:
+    def minPushBox(self, grid: List[List[str]]) -> int:
         m, n = len(grid), len(grid[0])
         box = next((i, j) for i in range(m) for j in range(n) if grid[i][j] == "B")
         player = next((i, j) for i in range(m) for j in range(n) if grid[i][j] == "S")
