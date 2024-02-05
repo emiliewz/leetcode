@@ -6,6 +6,51 @@ from typing import List
 
 class Solution:
     def minMalwareSpread(self, graph: List[List[int]], initial: List[int]) -> int:
+        def find(x):
+            if x != p[x]:
+                p[x] = find(p[x])
+            return p[x]
+
+        def union(x, y):
+            p1, p2 = find(x), find(y)
+            p[p2] = p1
+
+        def safe(i):
+            for j in initial:
+                if par[i] == par[j] and i != j:
+                    return False
+            return True
+
+        n = len(graph)
+        p = list(range(n))
+        for i, j in combinations(range(n), 2):
+            if graph[i][j]:
+                union(i, j)
+        candidates = []
+
+        initial.sort()
+        par = [find(i) for i in range(n)]
+
+        for i in initial:
+            if safe(i):
+                candidates.append(i)
+
+        if not candidates:
+            return initial[0]
+        if len(candidates) == 1:
+            return candidates[0]
+
+        counts = Counter(par)
+        a = {i: counts[par[i]] for i in candidates}
+        max_connect = max(a.values())
+
+        res = next(i for i, j in a.items() if j == max_connect)
+
+        return res
+
+
+class Solution:
+    def minMalwareSpread(self, graph: List[List[int]], initial: List[int]) -> int:
         def hasConnect(i):
             for j in initial:
                 if i != j:
