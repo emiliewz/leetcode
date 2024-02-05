@@ -4,6 +4,27 @@ from heapq import heappop, heappush
 from typing import List
 
 
+class Solution:
+    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+        graph = defaultdict(dict)
+
+        for u, v, w in times:
+            graph[u][v] = w
+        h = [(0, k)]
+        time = [float("inf")] * (n + 1)
+        time[k] = 0
+
+        while h:
+            w, cur = heappop(h)
+            for nei in graph[cur]:
+                new_w = graph[cur][nei] + w
+                if new_w < time[nei]:
+                    time[nei] = new_w
+                    heappush(h, (new_w, nei))
+        maxTime = max(time[1:])
+        return maxTime if maxTime != float("inf") else -1
+
+
 # Dijkstra's algorithm
 # Time complexity: O(E * log(V)), Space complexity: O(V + E)
 class Solution:
