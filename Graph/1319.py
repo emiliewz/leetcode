@@ -7,6 +7,32 @@ class Solution:
         k = len(connections)
         if k < n - 1:
             return -1
+
+        def find(x):
+            if x != p[x]:
+                p[x] = find(p[x])
+            return p[x]
+
+        def union(x, y):
+            p1, p2 = find(x), find(y)
+            if p1 == p2:
+                return False
+            p[p1] = p2
+            return True
+
+        p = list(range(n))
+        res = n
+        for i, j in connections:
+            res -= union(i, j)
+
+        return res - 1
+
+
+class Solution:
+    def makeConnected(self, n: int, connections: List[List[int]]) -> int:
+        k = len(connections)
+        if k < n - 1:
+            return -1
         p = list(range(n))
         rank = [1] * n
         res = n
