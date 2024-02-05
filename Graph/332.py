@@ -1,7 +1,41 @@
-
 # 332. Reconstruct Itinerary
 from collections import defaultdict
 from typing import List
+
+
+class Solution:
+    def findItinerary(self, tickets: List[List[str]]) -> List[str]:
+        tickets.sort(reverse=True)
+        graph = defaultdict(list)
+
+        for i, j in tickets:
+            graph[i].append(j)
+        res = []
+        stack = ["JFK"]
+
+        while stack:
+            while graph[stack[-1]]:
+                stack.append(graph[stack[-1]].pop())
+            res.append(stack.pop())
+        return res[::-1]
+
+
+class Solution:
+    def findItinerary(self, tickets: List[List[str]]) -> List[str]:
+        tickets.sort(reverse=True)
+        graph = defaultdict(list)
+
+        for i, j in tickets:
+            graph[i].append(j)
+        res = []
+
+        def dfs(i):
+            while graph[i]:
+                dfs(graph[i].pop())
+            res.append(i)
+
+        dfs("JFK")
+        return res[::-1]
 
 
 # Euler path
