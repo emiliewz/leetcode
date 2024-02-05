@@ -4,6 +4,29 @@ from heapq import heappop, heappush
 from typing import List
 
 
+class Solution:
+    def findCheapestPrice(
+        self, n: int, flights: List[List[int]], src: int, dst: int, k: int
+    ) -> int:
+        graph = defaultdict(dict)
+        for u, v, w in flights:
+            graph[u][v] = w
+        h = [(0, 0, src)]
+        price = [float("inf")] * n
+
+        while h:
+            c, w, cur = heappop(h)
+
+            if c <= k:
+                for nei in graph[cur]:
+                    new_price = w + graph[cur][nei]
+                    if new_price < price[nei]:
+                        price[nei] = new_price
+                        heappush(h, (c + 1, new_price, nei))
+
+        return price[dst] if price[dst] != float("inf") else -1
+
+
 # Bellman-Ford algorithm
 # Time complexity: O(E * K)
 # Space complexity: O(n)
