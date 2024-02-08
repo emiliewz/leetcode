@@ -6,6 +6,37 @@ from typing import List
 class Solution:
     def maximalSquare(self, matrix: List[List[str]]) -> int:
         m, n = len(matrix), len(matrix[0])
+        a = [[0] * (n + 1) for _ in range(m + 1)]
+        res = 0
+
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if matrix[i - 1][j - 1] == "1":
+                    a[i][j] = min(a[i - 1][j], a[i - 1][j - 1], a[i][j - 1]) + 1
+                    res = max(res, a[i][j])
+        return res**2
+
+
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        m, n = len(matrix), len(matrix[0])
+        a = [[(0, 0)] * (n + 1) for _ in range(m + 1)]
+        max_len = 0
+
+        for i in range(1, m + 1):
+            for j in range(1, n + 1):
+                if matrix[i - 1][j - 1] == "1":
+                    a[i][j] = (
+                        min(a[i - 1][j][0], a[i - 1][j - 1][0]) + 1,
+                        min(a[i][j - 1][1], a[i - 1][j - 1][1]) + 1,
+                    )
+                    max_len = max(max_len, min(a[i][j]))
+        return max_len**2
+
+
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        m, n = len(matrix), len(matrix[0])
         dp = [[0] * (n + 1) for _ in range(m + 1)]
         res = 0
 
