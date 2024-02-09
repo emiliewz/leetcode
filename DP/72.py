@@ -11,6 +11,7 @@ class Solution:
                 if word1[i - 1] == word2[j - 1]:
                     a[j] = tmp[j - 1]
                 else:
+
                     a[j] = min(tmp[j], tmp[j - 1], a[j - 1]) + 1
 
         return a[-1]
