@@ -5,6 +5,29 @@ from typing import List
 class Solution:
     def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
         n = len(books)
+        a = [0] * n
+        a[0] = books[0][1]
+
+        for i in range(1, n):
+            h = books[i][1]
+            w = books[i][0]
+            a[i] = a[i - 1] + h
+            j = i - 1
+
+            while w < shelfWidth and j >= 0:
+                w += books[j][0]
+                if w > shelfWidth:
+                    break
+                h = max(h, books[j][1])
+                a[i] = min(a[i], a[j - 1] + h if j > 0 else h)
+                j -= 1
+
+        return a[-1]
+
+
+class Solution:
+    def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
+        n = len(books)
         a = [float("inf")] * n
         a[0] = books[0][1]
 
