@@ -4,19 +4,19 @@ from typing import List
 
 class Solution:
     def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
-        n = len(s)
-        res = []
-
-        def dp(i, cur):
+        def dfs(i, cur):
             if i == n:
                 res.append(" ".join(cur))
                 return
 
-            for j in range(i, n + 1):
-                if s[i:j] in wordDict:
-                    dp(j, cur + [s[i:j]])
+            for j in range(i + 1, n + 1):
+                if s[i:j] in words:
+                    dfs(j, cur + [s[i:j]])
 
-        dp(0, [])
+        words = set(wordDict)
+        n = len(s)
+        res = []
+        dfs(0, [])
         return res
 
 
