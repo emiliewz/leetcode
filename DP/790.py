@@ -4,9 +4,19 @@ from functools import cache
 
 class Solution:
     def numTilings(self, n: int) -> int:
+        part, full, empty = 0, 1, 1
+
+        for _ in range(n - 1):
+            part, full, empty = empty + part, part * 2 + empty + full, full
+
+        return full % (10**9 + 7)
+
+
+class Solution:
+    def numTilings(self, n: int) -> int:
         prev_empty, part, full = 0, 0, 1
 
-        for i in range(n):
+        for _ in range(n):
             tmp = full
             full = part * 2 + prev_empty + full
             part = prev_empty + part
@@ -21,7 +31,7 @@ class Solution:
             return n
         prev_full, full, part = 1, 2, 1
 
-        for i in range(2, n):
+        for _ in range(2, n):
             cur = full
             full += part * 2 + prev_full
             part += prev_full
@@ -39,7 +49,7 @@ class Solution:
         cur_top_empty = 1
         cur_bottom_empty = 1
 
-        for i in range(2, n):
+        for _ in range(2, n):
             a, b, c, d = prev_full, cur_full, cur_top_empty, cur_bottom_empty
             cur_full = a + b + c + d
             cur_top_empty = a + d
@@ -55,7 +65,7 @@ class Solution:
             return n
 
         prev_full, full, part_fill = 1, 1, 0
-        for i in range(1, n):
+        for _ in range(1, n):
             tmp = full
             full += 2 * part_fill + prev_full
             part_fill += prev_full
