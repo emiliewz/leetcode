@@ -4,6 +4,24 @@ from typing import Counter, List
 
 class Solution:
     def deleteAndEarn(self, nums: List[int]) -> int:
+        a = {}
+        for n in nums:
+            if n in a:
+                a[n] += 1
+            else:
+                a[n] = 1
+
+        keys = sorted(a.keys())
+        f, s = 0, 0
+
+        for i in range(keys[0], keys[-1] + 1):
+            f, s = max(a.get(i, 0) * i + s, f), f
+
+        return max(f, s)
+
+
+class Solution:
+    def deleteAndEarn(self, nums: List[int]) -> int:
         a = Counter(nums)
 
         f, s = 0, 0
@@ -41,7 +59,6 @@ class Solution:
 class Solution:
     def deleteAndEarn(self, nums: List[int]) -> int:
         nums.sort()
-        n = len(nums)
         a = {i: 0 for i in range(nums[-1] + 1)}
         for i in nums:
             a[i] += 1
