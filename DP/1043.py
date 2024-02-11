@@ -9,23 +9,9 @@ class Solution:
             return max(arr) * n
         a = [0] * (n + 1)
 
-        for i in range(n + 1):
-            cur_max = 0
-            for j in range(1, min(i, k) + 1):
-                cur_max = max(arr[i - j], cur_max)
-                a[i] = max(a[i], a[i - j] + cur_max * j)
-        return a[-1]
-
-
-class Solution:
-    def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
-        n = len(arr)
-        dp = [0] * (n + 1)
-
         for i in range(1, n + 1):
             cur_max = 0
-            for j in range(1, min(k, i) + 1):
+            for j in range(1, min(i, k) + 1):
                 cur_max = max(cur_max, arr[i - j])
-                dp[i] = max(dp[i], dp[i - j] + j * cur_max)
-
-        return dp[-1]
+                a[i] = max(a[i], cur_max * j + a[i - j])
+        return a[-1]
