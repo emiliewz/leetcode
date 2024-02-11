@@ -6,46 +6,18 @@ class Solution:
     def findPaths(
         self, m: int, n: int, maxMove: int, startRow: int, startColumn: int
     ) -> int:
-        MOD = 10**9 + 7
-        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        direct = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 
         @cache
-        def dp(x, y, k):
-            if x < 0 or y < 0 or x >= m or y >= n:
+        def dfs(i, j, k):
+            if i < 0 or i >= m or j < 0 or j >= n:
                 return 1
             if k == 0:
                 return 0
 
             res = 0
-            for dx, dy in directions:
-                res += dp(x + dx, y + dy, k - 1)
-            return res % MOD
-
-        return dp(startRow, startColumn, maxMove)
-
-
-class Solution:
-    def findPaths(
-        self, m: int, n: int, maxMove: int, startRow: int, startColumn: int
-    ) -> int:
-        directions = [(1, 0), (0, 1), (-1, 0), (0, -1)]
-        memo = {}
-
-        def dfs(x, y, move):
-            if x < 0 or x >= m or y < 0 or y >= n:
-                return 1
-
-            if move == maxMove:
-                return 0
-
-            if (x, y, move) in memo:
-                return memo[(x, y, move)]
-
-            res = 0
-            for dx, dy in directions:
-                res += dfs(x + dx, y + dy, move + 1)
-
-            memo[(x, y, move)] = res
+            for dx, dy in direct:
+                res += dfs(i + dx, j + dy, k - 1)
             return res
 
-        return dfs(startRow, startColumn, 0) % (10**9 + 7)
+        return dfs(startRow, startColumn, maxMove) % (10**9 + 7)
