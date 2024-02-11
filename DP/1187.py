@@ -1,91 +1,22 @@
 # 1187. Make Array Strictly Increasing
-from bisect import bisect_left, bisect_right
-from functools import cache
+from bisect import bisect_right
 from typing import List
 
 
 class Solution:
     def makeArrayIncreasing(self, arr1: List[int], arr2: List[int]) -> int:
-        arr2.sort()
-        m, n = len(arr1), len(arr2)
+        arr2 = sorted(set(arr2))
+        n = len(arr2)
+        a = {-1: 0}
 
-        @cache
-        def dp(i, cur):
-            if i == m:
-                return 0
-            pos = bisect_right(arr2, cur)
-            # pos = bisect_left(arr2, cur+1)
+        for i in arr1:
+            tmp = a.copy()
+            a = {}
+            for k in tmp:
+                if i > k:
+                    a[i] = min(a.get(i, float("inf")), tmp[k])
+                j = bisect_right(arr2, k)
+                if j < n:
+                    a[arr2[j]] = min(a.get(arr2[j], float("inf")), tmp[k] + 1)
 
-            return min(
-                dp(i + 1, arr1[i]) if arr1[i] > cur else float("inf"),
-                dp(i + 1, arr2[pos]) + 1 if pos < n else float("inf"),
-            )
-
-        return dp(0, -1) if dp(0, -1) != float("inf") else -1
-
-
-class Solution:
-    def makeArrayIncreasing(self, arr1: List[int], arr2: List[int]) -> int:
-        m, n = len(arr1), len(arr2)
-        arr2.sort()
-        memo = {}
-
-        def dp(i, prev_max):
-            if i == m:
-                return 0
-            if (i, prev_max) in memo:
-                return memo[(i, prev_max)]
-            j = bisect_right(arr2, prev_max)
-            ans = float("inf")
-            if arr1[i] > prev_max:
-                ans = min(dp(i + 1, arr1[i]), ans)
-            if j < n:
-                ans = min(dp(i + 1, arr2[j]) + 1, ans)
-            memo[(i, prev_max)] = ans
-            return ans
-
-        res = dp(0, -1)
-        return res if res != float("inf") else -1
-
-
-class Solution:
-    def makeArrayIncreasing(self, arr1: List[int], arr2: List[int]) -> int:
-        m, n = len(arr1), len(arr2)
-        arr2.sort()
-
-        @cache
-        def dp(i, prev_max):
-            if i == m:
-                return 0
-            j = bisect_right(arr2, prev_max)
-            ans = float("inf")
-            if arr1[i] > prev_max:
-                ans = min(ans, dp(i + 1, arr1[i]))
-            if j < n:
-                ans = min(ans, dp(i + 1, arr2[j]) + 1)
-            return ans
-
-        res = dp(0, -1)
-        return res if res <= m else -1
-
-
-class Solution:
-    def makeArrayIncreasing(self, arr1: List[int], arr2: List[int]) -> int:
-        nums = sorted(set(arr2))
-        m, n = len(arr1), len(nums)
-
-        @cache
-        def dp(i, prev_max):
-            if i == m:
-                return 0
-
-            # j = bisect_left(nums, prev_max+1)
-            j = bisect_right(nums, prev_max)
-
-            return min(
-                dp(i + 1, nums[j]) + 1 if j < n else float("inf"),
-                dp(i + 1, arr1[i]) if (i == 0 or arr1[i] > prev_max) else float("inf"),
-            )
-
-        res = dp(0, -1)
-        return res if res != float("inf") else -1
+        return min(a.values()) if a else -1
