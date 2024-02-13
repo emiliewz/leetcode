@@ -18,8 +18,6 @@ class Solution:
         while stack:
             cur = stack.pop()
             res.append(cur.val)
-
-            for child in cur.children[::-1]:
-                stack.append(child)
+            stack.extend(reversed(cur.children))
 
         return res
