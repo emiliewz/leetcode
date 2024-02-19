@@ -25,3 +25,22 @@ class Solution:
 
         mc = max(a.values())
         return [i for i in a if a[i] == mc]
+
+
+class Solution:
+    def findMode(self, root: Optional[TreeNode]) -> List[int]:
+        stack, cur, prev, res, max_count, cur_count = [], root, -float("inf"), [], 0, 0
+        while stack or cur:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            cur = stack.pop()
+            cur_count = cur_count + 1 if cur.val == prev else 1
+            if cur_count > max_count:
+                max_count = cur_count
+                res = [cur.val]
+            elif cur_count == max_count:
+                res.append(cur.val)
+            prev = cur.val
+            cur = cur.right
+        return res
