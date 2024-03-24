@@ -11,6 +11,26 @@ class ListNode:
 
 class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        res = ListNode(0, head)
+        pre, cur = res, head
+        while cur and cur.next:
+            # save ptrs
+            second = cur.next
+            later = cur.next.next
+
+            # swap ptrs
+            second.next = cur
+            cur.next = later
+            pre.next = second
+
+            # update ptrs
+            pre = cur
+            cur = later
+        return res.next
+
+
+class Solution:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
         cur, cur.next = self, head
         while cur.next and cur.next.next:
             a = cur.next
