@@ -11,25 +11,16 @@ class Solution:
         # a / e = -1
         # x / x = ? -1
         
-        # use {a: (b, a/b), (c, a/c) ; b: (a, b/a), (c, b/c) ; c: (a, c/a), (b, a/b)}
-        
-        graph = defaultdict(list)
-        
-        for i, (u,v) in enumerate(equations):
-            graph[u].append((v, values[i]))
-            graph[v].append((u, 1/values[i]))
-           
-        # bfs
-        # 
-        queue = deque()
-        
-        
+        # use {a: {b: a/b, c: a/c} ; b: {a: b/a, c: b/c} ; c: {a: c/a, b: a/b}}
         
         graph = defaultdict(dict)
-        
+        # {}
+        # [["a","b"],["b","c"]]
         for i, (u,v) in enumerate(equations):
-            graph[u][v]=values[i]
-            graph[v][u]=1/values[i]
+            graph[u][v]=values[i] # u/v
+            graph[v][u]=1/values[i] # v/u
+            
+        # a, b ,c -> ab, bc, ac
             
         for i in graph:
             graph[i][i] = 1
@@ -41,6 +32,4 @@ class Solution:
         return [graph[u][v] if u in graph and v in graph[u] else -1 for u,v in queries]
                 
         
-            
-            
-            
+        
