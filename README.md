@@ -10,6 +10,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0399-evaluate-division](https://github.com/emiliewz/leetcode/tree/master/0399-evaluate-division) |
+| [1894-merge-strings-alternately](https://github.com/emiliewz/leetcode/tree/master/1894-merge-strings-alternately) |
 ## Depth-First Search
 |  |
 | ------- |
@@ -38,4 +39,8 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [1586-longest-subarray-of-1s-after-deleting-one-element](https://github.com/emiliewz/leetcode/tree/master/1586-longest-subarray-of-1s-after-deleting-one-element) |
+## Two Pointers
+|  |
+| ------- |
+| [1894-merge-strings-alternately](https://github.com/emiliewz/leetcode/tree/master/1894-merge-strings-alternately) |
 <!---LeetCode Topics End-->
