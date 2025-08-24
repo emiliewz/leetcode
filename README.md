@@ -9,6 +9,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## String
 |  |
 | ------- |
+| [0389-find-the-difference](https://github.com/emiliewz/leetcode/tree/master/0389-find-the-difference) |
 | [0399-evaluate-division](https://github.com/emiliewz/leetcode/tree/master/0399-evaluate-division) |
 | [1894-merge-strings-alternately](https://github.com/emiliewz/leetcode/tree/master/1894-merge-strings-alternately) |
 ## Depth-First Search
@@ -43,4 +44,16 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [1894-merge-strings-alternately](https://github.com/emiliewz/leetcode/tree/master/1894-merge-strings-alternately) |
+## Hash Table
+|  |
+| ------- |
+| [0389-find-the-difference](https://github.com/emiliewz/leetcode/tree/master/0389-find-the-difference) |
+## Bit Manipulation
+|  |
+| ------- |
+| [0389-find-the-difference](https://github.com/emiliewz/leetcode/tree/master/0389-find-the-difference) |
+## Sorting
+|  |
+| ------- |
+| [0389-find-the-difference](https://github.com/emiliewz/leetcode/tree/master/0389-find-the-difference) |
 <!---LeetCode Topics End-->
