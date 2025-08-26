@@ -6,6 +6,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | ------- |
 | [0399-evaluate-division](https://github.com/emiliewz/leetcode/tree/master/0399-evaluate-division) |
 | [0753-open-the-lock](https://github.com/emiliewz/leetcode/tree/master/0753-open-the-lock) |
+| [1039-find-the-town-judge](https://github.com/emiliewz/leetcode/tree/master/1039-find-the-town-judge) |
 | [1586-longest-subarray-of-1s-after-deleting-one-element](https://github.com/emiliewz/leetcode/tree/master/1586-longest-subarray-of-1s-after-deleting-one-element) |
 ## String
 |  |
@@ -31,6 +32,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0399-evaluate-division](https://github.com/emiliewz/leetcode/tree/master/0399-evaluate-division) |
+| [1039-find-the-town-judge](https://github.com/emiliewz/leetcode/tree/master/1039-find-the-town-judge) |
 ## Shortest Path
 |  |
 | ------- |
@@ -52,6 +54,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | ------- |
 | [0389-find-the-difference](https://github.com/emiliewz/leetcode/tree/master/0389-find-the-difference) |
 | [0753-open-the-lock](https://github.com/emiliewz/leetcode/tree/master/0753-open-the-lock) |
+| [1039-find-the-town-judge](https://github.com/emiliewz/leetcode/tree/master/1039-find-the-town-judge) |
 ## Bit Manipulation
 |  |
 | ------- |
