@@ -19,21 +19,23 @@ class Solution:
             
             
         queue = deque()
-        queue.append(('0000', 0))
+        queue.append('0000')
         visited = set(deadends)
         visited.add('0000')
+        steps = 0
 
         
         while queue:
-            curr, turns = queue.popleft()
             
-            if curr == target:
-                return turns
+            for _ in range(len(queue)):
+                cur = queue.popleft()
             
-            for neighbor in getNeighbor(curr):
-                if neighbor not in visited:
-                    visited.add(neighbor)
-                    queue.append((neighbor, turns+1))
-            
-        return -1
+                if cur == target:
+                    return steps
                 
+                for neighbor in getNeighbor(cur):
+                    if neighbor not in visited:
+                        visited.add(neighbor)
+                        queue.append(neighbor)
+            steps += 1
+        return -1
