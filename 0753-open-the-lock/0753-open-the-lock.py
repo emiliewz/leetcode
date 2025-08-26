@@ -6,9 +6,9 @@ class Solution:
         def getNeighbor(lock):
             res = []
             for i in range(4):
-                res.append(lock[:i] + str((int(lock[i])+1+10)%10) + lock[i+1:])
-                
-                res.append(lock[:i] + str((int(lock[i])-1+10)%10) + lock[i+1:])
+                n = int(lock[i])
+                res.append(lock[:i] + str((n+1)%10) + lock[i+1:])
+                res.append(lock[:i] + str((n-1)%10) + lock[i+1:])
             return res
             
             
@@ -18,15 +18,11 @@ class Solution:
         visited.add('0000')
         steps = 0
 
-        
         while queue:
-            
             for _ in range(len(queue)):
                 cur = queue.popleft()
-            
                 if cur == target:
                     return steps
-                
                 for neighbor in getNeighbor(cur):
                     if neighbor not in visited:
                         visited.add(neighbor)
