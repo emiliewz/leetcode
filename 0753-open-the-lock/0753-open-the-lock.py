@@ -5,16 +5,10 @@ class Solution:
         
         def getNeighbor(lock):
             res = []
-            
             for i in range(4):
-                res.append(
-                    lock[:i] + str((int(lock[i])+1+10)%10) + lock[i+1:]
-                )
+                res.append(lock[:i] + str((int(lock[i])+1+10)%10) + lock[i+1:])
                 
-                res.append(
-                    lock[:i] + str((int(lock[i])-1+10)%10) + lock[i+1:]
-                )
-            
+                res.append(lock[:i] + str((int(lock[i])-1+10)%10) + lock[i+1:])
             return res
             
             
