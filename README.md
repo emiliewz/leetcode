@@ -41,6 +41,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Dynamic Programming
 |  |
 | ------- |
+| [0070-climbing-stairs](https://github.com/emiliewz/leetcode/tree/master/0070-climbing-stairs) |
 | [1586-longest-subarray-of-1s-after-deleting-one-element](https://github.com/emiliewz/leetcode/tree/master/1586-longest-subarray-of-1s-after-deleting-one-element) |
 ## Sliding Window
 |  |
@@ -67,9 +68,14 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Math
 |  |
 | ------- |
+| [0070-climbing-stairs](https://github.com/emiliewz/leetcode/tree/master/0070-climbing-stairs) |
 | [1119-robot-bounded-in-circle](https://github.com/emiliewz/leetcode/tree/master/1119-robot-bounded-in-circle) |
 ## Simulation
 |  |
 | ------- |
 | [1119-robot-bounded-in-circle](https://github.com/emiliewz/leetcode/tree/master/1119-robot-bounded-in-circle) |
+## Memoization
+|  |
+| ------- |
+| [0070-climbing-stairs](https://github.com/emiliewz/leetcode/tree/master/0070-climbing-stairs) |
 <!---LeetCode Topics End-->
