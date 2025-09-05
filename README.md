@@ -11,6 +11,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## String
 |  |
 | ------- |
+| [0187-repeated-dna-sequences](https://github.com/emiliewz/leetcode/tree/master/0187-repeated-dna-sequences) |
 | [0389-find-the-difference](https://github.com/emiliewz/leetcode/tree/master/0389-find-the-difference) |
 | [0399-evaluate-division](https://github.com/emiliewz/leetcode/tree/master/0399-evaluate-division) |
 | [0753-open-the-lock](https://github.com/emiliewz/leetcode/tree/master/0753-open-the-lock) |
@@ -46,6 +47,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Sliding Window
 |  |
 | ------- |
+| [0187-repeated-dna-sequences](https://github.com/emiliewz/leetcode/tree/master/0187-repeated-dna-sequences) |
 | [1586-longest-subarray-of-1s-after-deleting-one-element](https://github.com/emiliewz/leetcode/tree/master/1586-longest-subarray-of-1s-after-deleting-one-element) |
 ## Two Pointers
 |  |
@@ -54,12 +56,14 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Hash Table
 |  |
 | ------- |
+| [0187-repeated-dna-sequences](https://github.com/emiliewz/leetcode/tree/master/0187-repeated-dna-sequences) |
 | [0389-find-the-difference](https://github.com/emiliewz/leetcode/tree/master/0389-find-the-difference) |
 | [0753-open-the-lock](https://github.com/emiliewz/leetcode/tree/master/0753-open-the-lock) |
 | [1039-find-the-town-judge](https://github.com/emiliewz/leetcode/tree/master/1039-find-the-town-judge) |
 ## Bit Manipulation
 |  |
 | ------- |
+| [0187-repeated-dna-sequences](https://github.com/emiliewz/leetcode/tree/master/0187-repeated-dna-sequences) |
 | [0389-find-the-difference](https://github.com/emiliewz/leetcode/tree/master/0389-find-the-difference) |
 ## Sorting
 |  |
@@ -78,4 +82,12 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0070-climbing-stairs](https://github.com/emiliewz/leetcode/tree/master/0070-climbing-stairs) |
+## Rolling Hash
+|  |
+| ------- |
+| [0187-repeated-dna-sequences](https://github.com/emiliewz/leetcode/tree/master/0187-repeated-dna-sequences) |
+## Hash Function
+|  |
+| ------- |
+| [0187-repeated-dna-sequences](https://github.com/emiliewz/leetcode/tree/master/0187-repeated-dna-sequences) |
 <!---LeetCode Topics End-->
