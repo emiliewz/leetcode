@@ -12,6 +12,7 @@ class Solution:
             if v+i >= n-1:
                 return True
 
-            m = max(m, v+i)
-
+            if m < v+i:
+                m = v+i
+                
         return m >= n-1
