@@ -10,6 +10,9 @@ class Solution:
         a = [0] * (n+1)
         a[0] = a[1] = 1
         
+        # max index of string is (n-1)
+        # but we iterate through 2 to n, so the last element will out of bound 
+        
         for i in range(2, n+1):
             if int(s[i-1]) != 0:
                 a[i] = a[i-1]
