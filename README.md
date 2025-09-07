@@ -4,6 +4,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Array
 |  |
 | ------- |
+| [0274-h-index](https://github.com/emiliewz/leetcode/tree/master/0274-h-index) |
 | [0399-evaluate-division](https://github.com/emiliewz/leetcode/tree/master/0399-evaluate-division) |
 | [0753-open-the-lock](https://github.com/emiliewz/leetcode/tree/master/0753-open-the-lock) |
 | [1039-find-the-town-judge](https://github.com/emiliewz/leetcode/tree/master/1039-find-the-town-judge) |
@@ -68,6 +69,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Sorting
 |  |
 | ------- |
+| [0274-h-index](https://github.com/emiliewz/leetcode/tree/master/0274-h-index) |
 | [0389-find-the-difference](https://github.com/emiliewz/leetcode/tree/master/0389-find-the-difference) |
 ## Math
 |  |
@@ -90,4 +92,8 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0187-repeated-dna-sequences](https://github.com/emiliewz/leetcode/tree/master/0187-repeated-dna-sequences) |
+## Counting Sort
+|  |
+| ------- |
+| [0274-h-index](https://github.com/emiliewz/leetcode/tree/master/0274-h-index) |
 <!---LeetCode Topics End-->
