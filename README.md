@@ -4,6 +4,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Array
 |  |
 | ------- |
+| [0055-jump-game](https://github.com/emiliewz/leetcode/tree/master/0055-jump-game) |
 | [0274-h-index](https://github.com/emiliewz/leetcode/tree/master/0274-h-index) |
 | [0399-evaluate-division](https://github.com/emiliewz/leetcode/tree/master/0399-evaluate-division) |
 | [0753-open-the-lock](https://github.com/emiliewz/leetcode/tree/master/0753-open-the-lock) |
@@ -43,6 +44,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## Dynamic Programming
 |  |
 | ------- |
+| [0055-jump-game](https://github.com/emiliewz/leetcode/tree/master/0055-jump-game) |
 | [0070-climbing-stairs](https://github.com/emiliewz/leetcode/tree/master/0070-climbing-stairs) |
 | [1586-longest-subarray-of-1s-after-deleting-one-element](https://github.com/emiliewz/leetcode/tree/master/1586-longest-subarray-of-1s-after-deleting-one-element) |
 ## Sliding Window
@@ -96,4 +98,8 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 |  |
 | ------- |
 | [0274-h-index](https://github.com/emiliewz/leetcode/tree/master/0274-h-index) |
+## Greedy
+|  |
+| ------- |
+| [0055-jump-game](https://github.com/emiliewz/leetcode/tree/master/0055-jump-game) |
 <!---LeetCode Topics End-->
