@@ -14,6 +14,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## String
 |  |
 | ------- |
+| [0072-edit-distance](https://github.com/emiliewz/leetcode/tree/master/0072-edit-distance) |
 | [0091-decode-ways](https://github.com/emiliewz/leetcode/tree/master/0091-decode-ways) |
 | [0187-repeated-dna-sequences](https://github.com/emiliewz/leetcode/tree/master/0187-repeated-dna-sequences) |
 | [0389-find-the-difference](https://github.com/emiliewz/leetcode/tree/master/0389-find-the-difference) |
@@ -49,6 +50,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [0045-jump-game-ii](https://github.com/emiliewz/leetcode/tree/master/0045-jump-game-ii) |
 | [0055-jump-game](https://github.com/emiliewz/leetcode/tree/master/0055-jump-game) |
 | [0070-climbing-stairs](https://github.com/emiliewz/leetcode/tree/master/0070-climbing-stairs) |
+| [0072-edit-distance](https://github.com/emiliewz/leetcode/tree/master/0072-edit-distance) |
 | [0091-decode-ways](https://github.com/emiliewz/leetcode/tree/master/0091-decode-ways) |
 | [1586-longest-subarray-of-1s-after-deleting-one-element](https://github.com/emiliewz/leetcode/tree/master/1586-longest-subarray-of-1s-after-deleting-one-element) |
 ## Sliding Window
