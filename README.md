@@ -15,6 +15,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 ## String
 |  |
 | ------- |
+| [0006-zigzag-conversion](https://github.com/emiliewz/leetcode/tree/master/0006-zigzag-conversion) |
 | [0072-edit-distance](https://github.com/emiliewz/leetcode/tree/master/0072-edit-distance) |
 | [0091-decode-ways](https://github.com/emiliewz/leetcode/tree/master/0091-decode-ways) |
 | [0187-repeated-dna-sequences](https://github.com/emiliewz/leetcode/tree/master/0187-repeated-dna-sequences) |
