@@ -6,7 +6,8 @@ class Solution:
         k = 0
         for i,c in enumerate(s):
             res[k] += c
-            if (i // (numRows-1)) % 2:
+            print("i: ",i," k: ", k, "i // (numRows-1: ", i // (numRows-1), " i // (numRows-1) % 2: ", i // (numRows-1) % 2)
+            if i // (numRows-1) % 2:
                 k -= 1
             else:
                 k += 1
